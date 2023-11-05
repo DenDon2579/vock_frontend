@@ -1,0 +1,86 @@
+@import 'scss/variables.scss';
+
+.wordItem {
+  width: 100%;
+  // height: 30px;
+  border: none;
+  display: grid;
+  grid-template-columns: 1fr calc(26px + $smallSpacing);
+  column-gap: $spacing;
+  margin-bottom: $spacing;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.rounded {
+  border-radius: $mainBorderRadius !important;
+}
+
+.word {
+  border-radius: $mainBorderRadius;
+  display: flex;
+  position: relative;
+  padding: $smallSpacing 0;
+  z-index: 10;
+}
+
+.progressBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: $mainBorderRadius 0 0 $mainBorderRadius;
+  // width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: -1;
+}
+
+.wordInfo {
+  border-radius: $mainBorderRadius;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.text {
+  color: $mainTextColor;
+}
+
+.divider {
+  position: relative;
+  width: calc($spacing * 4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $borderColor;
+}
+
+.icon {
+}
+
+.icon {
+}
+
+.right {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 40px;
+}
+
+.progressValue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid $borderColor;
+}

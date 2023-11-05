@@ -1,0 +1,28 @@
+@import 'scss/variables.scss';
+
+.wrapper {
+  margin-top: 30px;
+  height: auto;
+}
+
+.content {
+  padding: $spacing;
+}
+
+.startLearningButton {
+  padding: $smallSpacing;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background: $accentColor;
+  }
+  &:active {
+    background: #ffffff17;
+  }
+}
+
+.text {
+  color: $mainTextColor;
+}

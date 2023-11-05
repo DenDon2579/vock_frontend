@@ -1,0 +1,42 @@
+@import 'scss/variables.scss';
+
+.main {
+  // border-radius: $mainBorderRadius;
+  // box-shadow: $mainBoxShadow;
+  // border: 1px solid $borderColor;
+
+  border-radius: $mainBorderRadius;
+  box-shadow: 0 2px 2px rgba(255, 255, 255, 0.01);
+}
+
+.gradient {
+  background: linear-gradient(
+    45deg,
+    rgba(230, 77, 255, 0.08),
+    rgba(255, 255, 255, 0.02)
+  );
+}
+
+.transparent {
+  background: transparent;
+}
+
+.solid {
+  z-index: 10;
+  background: rgba($mainBackgroundColor, 0.75);
+}
+
+.blank {
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.glass {
+  background: linear-gradient(
+    45deg,
+    rgba(230, 77, 255, 0.08),
+    rgba(255, 255, 255, 0.02)
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}

@@ -1,0 +1,59 @@
+@import 'scss/variables.scss';
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  padding: $spacing;
+  align-items: center;
+}
+
+.avatarWrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+}
+
+.text {
+  margin-left: $spacing;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    color: $mainTextColor;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: $mainLetterSpacing;
+  }
+}
+
+.optionsWrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .options {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.icon {
+  font-size: 22px;
+  &:last-child {
+    margin-left: $spacing;
+  }
+  color: $mainTextColor;
+}
