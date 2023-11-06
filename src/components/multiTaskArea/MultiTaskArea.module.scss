@@ -26,3 +26,61 @@
 .text {
   color: $mainTextColor;
 }
+
+//AddNewWord_AddNewWord_AddNewWord_AddNewWord_AddNewWord
+
+.inputWrapper {
+  margin-bottom: $spacing;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  position: relative;
+  height: $spacing * 3 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input {
+  color: $mainTextColor;
+  display: flex;
+  padding: $smallSpacing;
+  align-items: center;
+  width: 100%;
+  outline: none;
+  background: none;
+  border: 0;
+}
+
+.rangeInput {
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+  border-radius: $mainBorderRadius;
+  position: absolute;
+}
+
+.rangeInput::-webkit-slider-runnable-track {
+  height: 100%;
+}
+
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  border-radius: inherit;
+  background-color: #ffffff00;
+  height: 100%;
+  width: 2px;
+}
+
+// .rangeInputWrapper{
+//   position: relative;
+// }
+
+.progress {
+  color: $mainTextColor;
+}

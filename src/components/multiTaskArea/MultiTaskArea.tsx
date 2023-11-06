@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 import classes from './MultiTaskArea.module.scss';
 import MainBlock from 'components/ui/blocks/MainBlock';
 import { useAppSelector } from 'hooks/redux';
@@ -17,6 +17,69 @@ const StartLearningButton = () => {
   );
 };
 
+const AddNewWord = () => {
+  const [rangeInputColor, setRangeInputColor] = useState(
+    'linear-gradient(to right,rgba(255, 211, 56, 0.15) 50%, transparent 50%)'
+  );
+  const [progress, setProgress] = useState(50);
+  const rangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const progress = +e.target.value;
+    setProgress(progress);
+    const progressBarColors = {
+      low: 'rgba(255, 85, 85, 0.15)',
+      high: 'rgba(139, 255, 85, 0.15)',
+      mid: 'rgba(255, 211, 56, 0.15)',
+    };
+    let progressType: 'low' | 'mid' | 'high' = 'low';
+    if (progress > 34 && progress <= 66) {
+      progressType = 'mid';
+    } else if (progress > 66) {
+      progressType = 'high';
+    }
+
+    setRangeInputColor(
+      `linear-gradient(to right, ${progressBarColors[progressType]} ${progress}%, transparent ${progress}%)`
+    );
+  };
+  return (
+    <form>
+      <MainBlock
+        className={classes.inputWrapper}
+        h='auto'
+        w='100%'
+        type='gradient'
+      >
+        <input className={classes.input}></input>
+      </MainBlock>
+      <MainBlock
+        className={classes.inputWrapper}
+        h='auto'
+        w='100%'
+        type='gradient'
+      >
+        <input className={classes.input}></input>
+      </MainBlock>
+      <MainBlock
+        className={`${classes.inputWrapper} ${classes.rangeInputWrapper}`}
+        h='auto'
+        w='100%'
+        type='gradient'
+      >
+        <motion.input
+          initial={{ background: 'transparent' }}
+          animate={{ background: rangeInputColor }}
+          transition={{ type: 'spring', mass: 0.35 }}
+          defaultValue={50}
+          onChange={rangeInputHandler}
+          type='range'
+          className={classes.rangeInput}
+        />
+        <span className={classes.progress}>{`${progress}%`}</span>
+      </MainBlock>
+    </form>
+  );
+};
+
 type Props = {};
 const MultiTaskArea = (props: Props) => {
   const activeModules = useAppSelector((state) =>
@@ -26,7 +89,7 @@ const MultiTaskArea = (props: Props) => {
   );
   const modulesComponents = {
     learnButton: <StartLearningButton />,
-    addNewWord: <>New</>,
+    addNewWord: <AddNewWord />,
     dropArea: <>drop</>,
     notifications: <>notifs</>,
   };
