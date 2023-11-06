@@ -6,7 +6,13 @@ interface Props {
   children: ReactNode;
   w: string;
   h: string;
-  type: 'transparent' | 'gradient' | 'blank' | 'solid' | 'glass';
+  type:
+    | 'transparent'
+    | 'gradient'
+    | 'gradientContrast'
+    | 'blank'
+    | 'solid'
+    | 'glass';
   borderRadius?: string;
   className?: string;
   framer?: {

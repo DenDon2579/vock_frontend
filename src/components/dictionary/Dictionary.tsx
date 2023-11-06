@@ -29,6 +29,10 @@ const Dictionary = (props: Props) => {
       title: 'Все слова',
     },
     {
+      id: 12,
+      title: 'Не изучаются',
+    },
+    {
       id: 2,
       title: 'Основной словарь',
     },

@@ -29,21 +29,30 @@
 
 //AddNewWord_AddNewWord_AddNewWord_AddNewWord_AddNewWord
 
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
 .inputWrapper {
-  margin-bottom: $spacing;
-  &:last-child {
-    margin-bottom: 0;
-  }
   position: relative;
   height: $spacing * 3 !important;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.stage {
+  margin-bottom: $spacing;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 .input {
   color: $mainTextColor;
   display: flex;
-  padding: $smallSpacing;
+  padding: $smallSpacing $spacing;
   align-items: center;
   width: 100%;
   outline: none;
@@ -83,4 +92,72 @@
 
 .progress {
   color: $mainTextColor;
+}
+
+.label {
+  text-align: center;
+  color: $mainTextColor;
+  font-size: 14px;
+  margin-bottom: $smallSpacing;
+}
+
+.translationsPlaceholder {
+  font-size: 14px;
+  color: rgba(208, 194, 255, 0.2);
+}
+
+.translationList {
+  list-style: none;
+  color: $mainTextColor;
+}
+
+.translation {
+  padding: $smallSpacing $spacing;
+  border-bottom: 1px solid $borderColor;
+  &:last-child {
+    border-bottom: none;
+  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  border: 1px solid $borderColor;
+  outline: none;
+  background: none;
+  width: $spacing * 2;
+  height: $spacing * 2;
+  border-radius: $mainBorderRadius;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.checkbox:checked {
+  background: $accentColor;
+  padding: $smallSpacing;
+}
+
+.checkbox:hover {
+  scale: 1.1;
+}
+
+.checkbox:active {
+  scale: 0.9;
+  background: #ffffff03;
+}
+
+.buttons {
+  display: flex;
+  grid-template-columns: 1fr 2fr;
+  column-gap: $spacing;
+}
+
+.button {
+  text-wrap: nowrap;
+  color: $mainTextColor;
+  padding: $smallSpacing;
+  text-align: center;
 }

@@ -1,8 +1,9 @@
 import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 import classes from './MultiTaskArea.module.scss';
 import MainBlock from 'components/ui/blocks/MainBlock';
-import { useAppSelector } from 'hooks/redux';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { AnimatePresence, motion } from 'framer-motion';
+import { deactivateImportantModule } from 'store/slices/UiSlice';
 
 const StartLearningButton = () => {
   return (
@@ -18,17 +19,21 @@ const StartLearningButton = () => {
 };
 
 const AddNewWord = () => {
+  const dispatch = useAppDispatch();
   const [rangeInputColor, setRangeInputColor] = useState(
-    'linear-gradient(to right,rgba(255, 211, 56, 0.15) 50%, transparent 50%)'
+    'linear-gradient(to right,rgba(255, 211, 56, 0.1) 50%, transparent 50%)'
   );
+  const [englishWord, setEndlishWord] = useState('');
+  const [isWordEntered, setIsWordEntered] = useState(false);
   const [progress, setProgress] = useState(50);
+
   const rangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const progress = +e.target.value;
     setProgress(progress);
     const progressBarColors = {
-      low: 'rgba(255, 85, 85, 0.15)',
-      high: 'rgba(139, 255, 85, 0.15)',
-      mid: 'rgba(255, 211, 56, 0.15)',
+      low: 'rgba(255, 85, 85, 0.1)',
+      high: 'rgba(139, 255, 85, 0.1)',
+      mid: 'rgba(255, 211, 56, 0.1)',
     };
     let progressType: 'low' | 'mid' | 'high' = 'low';
     if (progress > 34 && progress <= 66) {
@@ -41,41 +46,98 @@ const AddNewWord = () => {
       `linear-gradient(to right, ${progressBarColors[progressType]} ${progress}%, transparent ${progress}%)`
     );
   };
+
+  const wordInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    if (value) {
+      setEndlishWord(value);
+      setIsWordEntered(true);
+    } else {
+      setIsWordEntered(false);
+    }
+  };
+
   return (
-    <form>
+    <form className={classes.form}>
+      <span className={classes.label}>Слово на английском</span>
       <MainBlock
-        className={classes.inputWrapper}
+        className={`${classes.inputWrapper} ${classes.stage}`}
         h='auto'
         w='100%'
         type='gradient'
       >
-        <input className={classes.input}></input>
+        <input
+          onChange={wordInputChangeHandler}
+          className={classes.input}
+        ></input>
       </MainBlock>
-      <MainBlock
-        className={classes.inputWrapper}
-        h='auto'
-        w='100%'
-        type='gradient'
-      >
-        <input className={classes.input}></input>
-      </MainBlock>
-      <MainBlock
-        className={`${classes.inputWrapper} ${classes.rangeInputWrapper}`}
-        h='auto'
-        w='100%'
-        type='gradient'
-      >
-        <motion.input
-          initial={{ background: 'transparent' }}
-          animate={{ background: rangeInputColor }}
-          transition={{ type: 'spring', mass: 0.35 }}
-          defaultValue={50}
-          onChange={rangeInputHandler}
-          type='range'
-          className={classes.rangeInput}
-        />
-        <span className={classes.progress}>{`${progress}%`}</span>
-      </MainBlock>
+
+      {isWordEntered && (
+        <>
+          <span className={classes.label}>Переводы</span>
+          <MainBlock
+            className={`${classes.translationsWrapper} ${classes.stage}`}
+            h='auto'
+            w='100%'
+            type='gradient'
+          >
+            <ul className={classes.translationList}>
+              <li className={classes.translation}>
+                <span>привет</span>
+                <input className={classes.checkbox} type='checkbox' />
+              </li>
+              <li className={classes.translation}>
+                <span>хай</span>
+                <input className={classes.checkbox} type='checkbox' />
+              </li>
+              <li className={classes.translation}>
+                <span>ку</span>
+                <input className={classes.checkbox} type='checkbox' />
+              </li>
+            </ul>
+          </MainBlock>
+          <span className={classes.label}>Как хорошо вы знаете это слово?</span>
+          <MainBlock
+            className={`${classes.inputWrapper} ${classes.stage}`}
+            h='auto'
+            w='100%'
+            type='gradient'
+          >
+            <motion.input
+              initial={{ background: 'transparent' }}
+              animate={{ background: rangeInputColor }}
+              transition={{ type: 'spring', mass: 0.35 }}
+              defaultValue={50}
+              onChange={rangeInputHandler}
+              type='range'
+              className={classes.rangeInput}
+            />
+            <span className={classes.progress}>{`${progress}%`}</span>
+          </MainBlock>
+        </>
+      )}
+
+      <div className={classes.buttons}>
+        <MainBlock
+          onClick={() => dispatch(deactivateImportantModule())}
+          className={classes.button}
+          h='auto'
+          w='100%'
+          type='gradient'
+        >
+          Назад
+        </MainBlock>
+        <MainBlock
+          hidden={!isWordEntered}
+          className={classes.button}
+          h='auto'
+          w='100%'
+          type='gradientContrast'
+        >
+          Добавить
+        </MainBlock>
+      </div>
     </form>
   );
 };
@@ -101,9 +163,10 @@ const MultiTaskArea = (props: Props) => {
             return (
               <motion.div
                 key={module}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0, opacity: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
               >
                 {modulesComponents[module]}
               </motion.div>
