@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classes from './Header.module.scss';
-import MainBlock from 'components/ui/blocks/MainBlock';
+import MainBlock from 'components/ui/blocks/mainBlock/MainBlock';
 import { IconContext } from 'react-icons';
 import { AiOutlineDown, AiOutlinePlus, AiOutlineSearch } from 'react-icons/ai';
 import { BsSortDown } from 'react-icons/bs';
@@ -11,6 +11,7 @@ import {
   activateImportantModule,
   setActiveModules,
 } from 'store/slices/UiSlice';
+import MainButton from 'components/ui/blocks/mainButton/MainButton';
 
 type Props = {};
 
@@ -92,13 +93,7 @@ const Header = (props: Props) => {
           </div>
         </div>
       </MainBlock>
-      <MainBlock
-        className={`${classes.block} ${classes.new}`}
-        w='100%'
-        h='100%'
-        type='gradient'
-        onClick={addNewWord}
-      >
+      <MainButton type='gradientContrast' onClick={addNewWord}>
         <IconContext.Provider
           value={{
             color: 'rgba(208, 194, 255, 0.7)',
@@ -107,7 +102,7 @@ const Header = (props: Props) => {
         >
           <AiOutlinePlus />
         </IconContext.Provider>
-      </MainBlock>
+      </MainButton>
     </motion.div>
   );
 };

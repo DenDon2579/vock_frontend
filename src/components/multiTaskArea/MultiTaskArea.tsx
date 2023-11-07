@@ -1,21 +1,13 @@
 import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 import classes from './MultiTaskArea.module.scss';
-import MainBlock from 'components/ui/blocks/MainBlock';
+import MainBlock from 'components/ui/blocks/mainBlock/MainBlock';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import { deactivateImportantModule } from 'store/slices/UiSlice';
+import MainButton from 'components/ui/blocks/mainButton/MainButton';
 
 const StartLearningButton = () => {
-  return (
-    <MainBlock
-      className={classes.startLearningButton}
-      w='auto'
-      h='auto'
-      type='gradient'
-    >
-      <span className={classes.text}>Начать изучение слов</span>
-    </MainBlock>
-  );
+  return <MainButton type='gradient'>Начать изучение слов</MainButton>;
 };
 
 const AddNewWord = () => {
@@ -70,6 +62,7 @@ const AddNewWord = () => {
         <input
           onChange={wordInputChangeHandler}
           className={classes.input}
+          placeholder='hello'
         ></input>
       </MainBlock>
 
@@ -85,15 +78,27 @@ const AddNewWord = () => {
             <ul className={classes.translationList}>
               <li className={classes.translation}>
                 <span>привет</span>
-                <input className={classes.checkbox} type='checkbox' />
+                <input
+                  className={classes.checkbox}
+                  type='checkbox'
+                  defaultChecked={true}
+                />
               </li>
               <li className={classes.translation}>
                 <span>хай</span>
-                <input className={classes.checkbox} type='checkbox' />
+                <input
+                  className={classes.checkbox}
+                  type='checkbox'
+                  defaultChecked={true}
+                />
               </li>
               <li className={classes.translation}>
                 <span>ку</span>
-                <input className={classes.checkbox} type='checkbox' />
+                <input
+                  className={classes.checkbox}
+                  type='checkbox'
+                  defaultChecked={true}
+                />
               </li>
             </ul>
           </MainBlock>
@@ -119,24 +124,15 @@ const AddNewWord = () => {
       )}
 
       <div className={classes.buttons}>
-        <MainBlock
+        <MainButton
           onClick={() => dispatch(deactivateImportantModule())}
-          className={classes.button}
-          h='auto'
-          w='100%'
           type='gradient'
         >
           Назад
-        </MainBlock>
-        <MainBlock
-          hidden={!isWordEntered}
-          className={classes.button}
-          h='auto'
-          w='100%'
-          type='gradientContrast'
-        >
+        </MainButton>
+        <MainButton isHidden={!isWordEntered} type='gradientContrast'>
           Добавить
-        </MainBlock>
+        </MainButton>
       </div>
     </form>
   );
@@ -152,7 +148,7 @@ const MultiTaskArea = (props: Props) => {
   const modulesComponents = {
     learnButton: <StartLearningButton />,
     addNewWord: <AddNewWord />,
-    dropArea: <>drop</>,
+    dropArea: <></>,
     notifications: <>notifs</>,
   };
   return (
@@ -162,13 +158,18 @@ const MultiTaskArea = (props: Props) => {
           {activeModules.map((module) => {
             return (
               <motion.div
-                key={module}
+                className={classes.module}
+                key={module.type}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                {modulesComponents[module]}
+                <div className={classes.title}>
+                  <span>{module.title}</span>
+                </div>
+
+                {modulesComponents[module.type]}
               </motion.div>
             );
           })}

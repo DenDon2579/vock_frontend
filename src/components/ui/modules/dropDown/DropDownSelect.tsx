@@ -6,7 +6,7 @@ import React, {
   ReactNode,
 } from 'react';
 import classes from './DropDownSelect.module.scss';
-import MainBlock from 'components/ui/blocks/MainBlock';
+import MainBlock from 'components/ui/blocks/mainBlock/MainBlock';
 import { IconContext } from 'react-icons';
 import { AiOutlineDown } from 'react-icons/ai';
 import { IDropDownItem } from 'types/ui';

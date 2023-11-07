@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import MainBlock from './components/ui/blocks/MainBlock';
+import MainBlock from './components/ui/blocks/mainBlock/MainBlock';
 import axios from 'axios';
 import Layout from './components/Layout/Layout';
 import Video from './static/media/qwe.mp4';

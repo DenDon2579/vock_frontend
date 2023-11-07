@@ -27,6 +27,24 @@
   color: $mainTextColor;
 }
 
+.title {
+  height: auto;
+  color: $mainTextColor;
+  font-weight: 500;
+  font-size: 18px;
+
+  padding-bottom: $spacing;
+  text-align: center;
+  // border-bottom: 1px solid $borderColor;
+}
+
+.module {
+  margin-bottom: $spacing * 2;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 //AddNewWord_AddNewWord_AddNewWord_AddNewWord_AddNewWord
 
 .form {

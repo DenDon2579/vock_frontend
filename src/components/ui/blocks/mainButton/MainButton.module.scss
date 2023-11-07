@@ -1,0 +1,17 @@
+@import 'scss/variables.scss';
+
+.button {
+  text-wrap: nowrap;
+  color: $mainTextColor;
+  padding: $smallSpacing;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background: $accentColor;
+  }
+  &:active {
+    background: #ffffff17;
+  }
+}

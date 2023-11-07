@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './MiniProfile.module.scss';
-import MainBlock from '../ui/blocks/MainBlock';
+import MainBlock from '../ui/blocks/mainBlock/MainBlock';
 import { AiOutlineLogout, AiOutlineSetting } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
 import DropDown from 'components/ui/modules/dropDown/DropDownSelect';

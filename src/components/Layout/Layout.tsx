@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Layout.module.scss';
-import MainBlock from '../ui/blocks/MainBlock';
+import MainBlock from '../ui/blocks/mainBlock/MainBlock';
 import { AiOutlineSetting } from 'react-icons/ai';
 import MiniProfile from '../miniProfile/MiniProfile';
 import Dictionary from 'components/dictionary/Dictionary';

@@ -3,7 +3,7 @@ import classes from './WordItem.module.scss';
 import { Variants, delay, motion } from 'framer-motion';
 import Icon from 'components/ui/other/icon/Icon';
 import { AiOutlineDown } from 'react-icons/ai';
-import MainBlock from 'components/ui/blocks/MainBlock';
+import MainBlock from 'components/ui/blocks/mainBlock/MainBlock';
 
 type Props = {
   progress: number;

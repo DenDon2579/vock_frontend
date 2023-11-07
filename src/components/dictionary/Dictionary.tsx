@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classes from './Dictionary.module.scss';
-import MainBlock from 'components/ui/blocks/MainBlock';
+import MainBlock from 'components/ui/blocks/mainBlock/MainBlock';
 import { IconContext } from 'react-icons';
 import { AiOutlineDown } from 'react-icons/ai';
 import {
@@ -14,6 +14,7 @@ import { IDropDownItem } from 'types/ui';
 import { log } from 'console';
 import Header from './header/Header';
 import WordList from './wordList/WordList';
+import { useAppSelector } from 'hooks/redux';
 
 type Props = {};
 
@@ -53,9 +54,20 @@ const Dictionary = (props: Props) => {
   const createDictionary = () => {
     console.log('NEW');
   };
-
+  const isMultiTaskAreaImportant = useAppSelector(
+    (state) => !!state.ui.multiTaskArea.modules.importantModule
+  );
   return (
-    <div className={classes.wrapper}>
+    <motion.div
+      initial={{ opacity: 1 }}
+      className={classes.wrapper}
+      animate={
+        isMultiTaskAreaImportant
+          ? { opacity: 0.3, pointerEvents: 'none' }
+          : { opacity: 1, pointerEvents: 'all' }
+      }
+      transition={{ duration: 1 }}
+    >
       <div className={classes.dictionarySelectWrapper}>
         <motion.div
           initial={{ y: 10, opacity: 0 }}
@@ -88,7 +100,7 @@ const Dictionary = (props: Props) => {
           <WordList />
         </div>
       </MainBlock>
-    </div>
+    </motion.div>
   );
 };
 
