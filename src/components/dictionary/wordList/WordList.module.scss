@@ -6,6 +6,7 @@
   padding: $spacing calc($spacing - 2px) $spacing $spacing;
   margin-bottom: $spacing;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .wrapper::-webkit-scrollbar {

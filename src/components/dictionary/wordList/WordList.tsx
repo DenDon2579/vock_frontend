@@ -12,6 +12,11 @@ const WordList = (props: Props) => {
     high: 'rgba(139, 255, 85, 0.05)',
     mid: 'rgba(255, 211, 56, 0.05)',
   };
+  const dndColors = {
+    low: 'rgba(255, 85, 85, 0.2)',
+    high: 'rgba(139, 255, 85, 0.2)',
+    mid: 'rgba(255, 211, 56, 0.2)',
+  };
   const words = [
     { id: 1, word: 'hello', translation: 'привет', progress: 30 },
     { id: 2, word: 'hello', translation: 'привет', progress: 100 },
@@ -25,7 +30,11 @@ const WordList = (props: Props) => {
     } else if (word.progress > 66) {
       progressType = 'high';
     }
-    return { ...word, progressBarColor: progressBarColors[progressType] };
+    return {
+      ...word,
+      progressBarColor: progressBarColors[progressType],
+      dndColor: dndColors[progressType],
+    };
   });
 
   return (

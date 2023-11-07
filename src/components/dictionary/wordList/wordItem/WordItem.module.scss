@@ -8,10 +8,10 @@
   grid-template-columns: 1fr calc(26px + $smallSpacing);
   column-gap: $spacing;
   margin-bottom: $spacing;
-
   &:last-child {
     margin-bottom: 0;
   }
+  position: relative;
 }
 
 .rounded {
@@ -83,4 +83,20 @@
   justify-content: center;
   align-items: center;
   border-left: 1px solid $borderColor;
+}
+
+.drag {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid $borderColor;
+  padding: 0 $spacing;
+  cursor: grab;
+  &:hover {
+    background: $accentColor !important;
+  }
 }

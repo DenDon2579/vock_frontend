@@ -63,7 +63,7 @@ const Dictionary = (props: Props) => {
       className={classes.wrapper}
       animate={
         isMultiTaskAreaImportant
-          ? { opacity: 0.3, pointerEvents: 'none' }
+          ? { opacity: 1, pointerEvents: 'none' }
           : { opacity: 1, pointerEvents: 'all' }
       }
       transition={{ duration: 1 }}

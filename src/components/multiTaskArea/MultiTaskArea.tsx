@@ -145,6 +145,8 @@ const MultiTaskArea = (props: Props) => {
       ? [state.ui.multiTaskArea.modules.importantModule]
       : state.ui.multiTaskArea.modules.activeModules
   );
+  console.log(activeModules);
+
   const modulesComponents = {
     learnButton: <StartLearningButton />,
     addNewWord: <AddNewWord />,
@@ -154,7 +156,7 @@ const MultiTaskArea = (props: Props) => {
   return (
     <MainBlock className={classes.wrapper} w='100%' h='auto' type='glass'>
       <div className={classes.content}>
-        <AnimatePresence mode='wait'>
+        <AnimatePresence mode='popLayout'>
           {activeModules.map((module) => {
             return (
               <motion.div
@@ -163,7 +165,7 @@ const MultiTaskArea = (props: Props) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.2 }}
               >
                 <div className={classes.title}>
                   <span>{module.title}</span>

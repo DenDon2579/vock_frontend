@@ -10,13 +10,13 @@ function App() {
     'dict.1.1.20231009T003419Z.59da905cfe137314.c40bb755827b88b24becea0d95068658e9dc2c76';
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
-  document.addEventListener('mousemove', (e) => {
-    setCursorPos({ x: e.clientX, y: e.clientY });
-  });
-  useEffect(() => {
-    const video: any = document.getElementById('video');
-    video.playbackRate = cursorPos.y / 1000 + 0.5;
-  });
+  // document.addEventListener('mousemove', (e) => {
+  //   setCursorPos({ x: e.clientX, y: e.clientY });
+  // });
+  // useEffect(() => {
+  //   const video: any = document.getElementById('video');
+  //   video.playbackRate = cursorPos.y / 1000 + 0.5;
+  // });
 
   return (
     <>
