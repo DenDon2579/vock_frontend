@@ -15,6 +15,7 @@ interface IState {
     modules: {
       activeModules: IModule[];
       importantModule: IModule | null;
+      focusOnImportant: boolean;
     };
   };
 }
@@ -24,6 +25,7 @@ const initialState: IState = {
     modules: {
       activeModules: [{ type: 'learnButton', title: moduleTitles.learnButton }],
       importantModule: null,
+      focusOnImportant: false,
     },
   },
 };
@@ -53,14 +55,19 @@ const UiSlice = createSlice({
         (i) => i.type !== action.payload
       );
     },
-    activateImportantModule(state, action: PayloadAction<ModulesTypes>) {
+    activateImportantModule(
+      state,
+      action: PayloadAction<[ModulesTypes, boolean]>
+    ) {
       state.multiTaskArea.modules.importantModule = {
-        type: action.payload,
-        title: moduleTitles[action.payload],
+        type: action.payload[0],
+        title: moduleTitles[action.payload[0]],
       };
+      state.multiTaskArea.modules.focusOnImportant = action.payload[1];
     },
     deactivateImportantModule(state) {
       state.multiTaskArea.modules.importantModule = null;
+      state.multiTaskArea.modules.focusOnImportant = false;
     },
   },
 });

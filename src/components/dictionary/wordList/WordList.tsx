@@ -13,9 +13,9 @@ const WordList = (props: Props) => {
     mid: 'rgba(255, 211, 56, 0.05)',
   };
   const dndColors = {
-    low: 'rgba(255, 85, 85, 0.2)',
-    high: 'rgba(139, 255, 85, 0.2)',
-    mid: 'rgba(255, 211, 56, 0.2)',
+    low: 'rgba(255, 85, 85, 0.25)',
+    high: 'rgba(139, 255, 85, 0.25)',
+    mid: 'rgba(255, 211, 56, 0.25)',
   };
   const words = [
     { id: 1, word: 'hello', translation: 'привет', progress: 30 },

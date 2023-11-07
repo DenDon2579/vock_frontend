@@ -26,12 +26,23 @@ const WordItem = (props: Props) => {
     hide: {
       opacity: 0,
       y: 20,
+      position: 'relative',
+      width: '100%',
+      height: 'auto',
     },
     show: (i: number) => ({
       transition: { delay: i * 0.15 + 1, type: 'spring' },
       opacity: 1,
       y: 0,
+      height: 30,
     }),
+    drag: {
+      position: 'absolute',
+      width: 0,
+      height: 30,
+      opacity: 1,
+      y: 0,
+    },
   };
   const progressBarVariants: Variants = {
     hide: {
@@ -56,20 +67,13 @@ const WordItem = (props: Props) => {
         dragControls={dragControls}
         dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
         dragElastic={1}
-        whileDrag={{
-          cursor: 'grabbing',
-          position: 'absolute',
-          width: 0,
-          height: 0,
-        }}
-        transition={{ duration: 0.25 }}
         variants={wordWrapperWariants}
         initial='hide'
-        animate='show'
+        animate={dragging ? 'drag' : 'show'}
+        transition={{ duration: 0.1 }}
+        // style={dragging ? { position: 'absolute', width: 0, height: 30 } : {}}
         custom={props.custom}
         className={classes.wordItem}
-        onDragStart={() => dispatch(activateImportantModule('dropArea'))}
-        onDragEnd={() => dispatch(deactivateImportantModule())}
       >
         <MainBlock w='auto' h='auto' type='gradient' className={classes.word}>
           <motion.div
@@ -95,18 +99,33 @@ const WordItem = (props: Props) => {
             dragTransition={{ bounceStiffness: 1, bounceDamping: 5000 }}
             onPointerDown={startDrag}
             className={classes.drag}
-            initial={{ background: 'none', borderRightWidth: 1 }}
-            whileDrag={{
+            initial={{
+              background: 'none',
+              borderRightWidth: 1,
+            }}
+            whileHover={{ background: '#d0c2ff14' }}
+            whileTap={{
+              cursor: 'grabbing',
               borderRightWidth: 0,
               background: props.dndColor,
-              borderRadius: 6,
-              height: 35,
-              width: 35,
+              zIndex: 9999999,
+              width: props.word.length * 16,
             }}
-            onDragStart={() => setDragging(true)}
-            onDragEnd={() => setDragging(false)}
+            onMouseDown={() => {
+              dispatch(activateImportantModule(['dropArea', false]));
+              setDragging(true);
+            }}
+            onMouseUp={() => {
+              dispatch(deactivateImportantModule());
+              setDragging(false);
+            }}
+            onDragEnd={() => {
+              dispatch(deactivateImportantModule());
+              setDragging(false);
+            }}
           >
             <Icon icon={RiDraggable} />
+            {dragging && <span className={classes.text}>{props.word}</span>}
           </motion.div>
           {!dragging && (
             <>
@@ -136,7 +155,7 @@ const WordItem = (props: Props) => {
           </MainBlock>
         )}
       </motion.div>
-      <div style={{ height: dragging ? 30 : 0 }}></div>
+      <div style={{ height: dragging ? 40 : 0 }}></div>
     </>
   );
 };

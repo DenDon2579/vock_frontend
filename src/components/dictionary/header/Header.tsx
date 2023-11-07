@@ -25,7 +25,7 @@ const Header = (props: Props) => {
     { id: 5, title: 'По прогрессу' },
   ];
   const addNewWord = () => {
-    dispatch(activateImportantModule('addNewWord'));
+    dispatch(activateImportantModule(['addNewWord', true]));
   };
   const [isSortUpstream, setSortDirection] = useState(false);
   return (
