@@ -4,6 +4,7 @@ import axios from 'axios';
 import Layout from './components/Layout/Layout';
 import Video from './static/media/qwe.mp4';
 import { motion } from 'framer-motion';
+import { useAppSelector } from 'hooks/redux';
 
 function App() {
   const KEY =
@@ -17,9 +18,12 @@ function App() {
   //   const video: any = document.getElementById('video');
   //   video.playbackRate = cursorPos.y / 1000 + 0.5;
   // });
-
+  const isDragging = useAppSelector(
+    (state) =>
+      state.ui.multiTaskArea.modules.importantModule?.type === 'dropArea'
+  );
   return (
-    <>
+    <div style={isDragging ? { cursor: 'grabbing' } : {}}>
       <Layout />
 
       <video
@@ -45,7 +49,7 @@ function App() {
         <input value={state} onChange={(e) => setState(e.target.value)} />
         <button onClick={getg}>Кукуку</button>
       </div> */}
-    </>
+    </div>
   );
 }
 

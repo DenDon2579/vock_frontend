@@ -142,15 +142,24 @@ const DropArea = () => {
   const [isDragOver, setIsDragOver] = useState(false);
   return (
     <>
-      <MainBlock
-        type='gradient'
+      <motion.div
         className={classes.dropArea}
         onMouseEnter={() => setIsDragOver(true)}
         onMouseLeave={() => setIsDragOver(false)}
         onMouseUp={() => alert('drop')}
+        initial={{}}
+        animate={
+          isDragOver
+            ? {
+                boxShadow: '0 0 10px 1px rgba(255, 255 ,255 ,0.1) inset',
+              }
+            : { boxShadow: 'none' }
+        }
       >
-        {}
-      </MainBlock>
+        <MainBlock h='100%' w='100%' type='gradient'>
+          {}
+        </MainBlock>
+      </motion.div>
     </>
   );
 };

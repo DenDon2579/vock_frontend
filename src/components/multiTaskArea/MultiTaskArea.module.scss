@@ -193,6 +193,7 @@
   width: 100%;
   height: 30px + $spacing;
   margin-top: $spacing;
+  border-radius: $mainBorderRadius;
   &:first-child {
     margin-top: 0;
   }

@@ -109,8 +109,9 @@ const WordItem = (props: Props) => {
               borderRightWidth: 0,
               background: props.dndColor,
               width: props.word.length * 16,
+              cursor: 'grabbing',
             }}
-            whileDrag={{ pointerEvents: 'none', cursor: 'grabbing' }}
+            whileDrag={{ pointerEvents: 'none' }}
             onMouseDown={() => {
               dispatch(activateImportantModule(['dropArea', false]));
               setDragging(true);
