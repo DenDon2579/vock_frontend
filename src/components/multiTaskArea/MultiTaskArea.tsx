@@ -138,6 +138,34 @@ const AddNewWord = () => {
   );
 };
 
+const DropArea = () => {
+  const [isDragOver, setIsDragOver] = useState(false);
+  return (
+    <>
+      <MainBlock
+        type='gradient'
+        className={classes.dropArea}
+        onMouseEnter={() => setIsDragOver(true)}
+        onMouseLeave={() => setIsDragOver(false)}
+        onMouseUp={() => alert('drop')}
+      >
+        {}
+      </MainBlock>
+    </>
+  );
+};
+
+const TransferZone = () => {
+  return (
+    <div className={classes.transferZone}>
+      <DropArea />
+      <DropArea />
+      <DropArea />
+      <DropArea />
+    </div>
+  );
+};
+
 type Props = {};
 const MultiTaskArea = (props: Props) => {
   const activeModules = useAppSelector((state) =>
@@ -150,7 +178,7 @@ const MultiTaskArea = (props: Props) => {
   const modulesComponents = {
     learnButton: <StartLearningButton />,
     addNewWord: <AddNewWord />,
-    dropArea: <></>,
+    dropArea: <TransferZone />,
     notifications: <>notifs</>,
   };
   return (

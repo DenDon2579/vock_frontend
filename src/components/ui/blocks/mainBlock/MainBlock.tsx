@@ -4,8 +4,8 @@ import { Transition, VariantLabels, Variants, motion } from 'framer-motion';
 
 interface Props {
   children: ReactNode;
-  w: string;
-  h: string;
+  w?: string;
+  h?: string;
   type:
     | 'transparent'
     | 'gradient'
