@@ -187,9 +187,13 @@
 .transferZone {
   width: 100%;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.dropArea {
+.dropAreaWrapper {
   width: 100%;
   height: 30px + $spacing;
   margin-top: $spacing;
@@ -200,4 +204,11 @@
   &:last-child {
     background: rgba(255, 0, 0, 0.091);
   }
+}
+
+.dropArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

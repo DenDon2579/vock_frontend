@@ -138,12 +138,12 @@ const AddNewWord = () => {
   );
 };
 
-const DropArea = () => {
+const DropArea = (props: any) => {
   const [isDragOver, setIsDragOver] = useState(false);
   return (
     <>
       <motion.div
-        className={classes.dropArea}
+        className={classes.dropAreaWrapper}
         onMouseEnter={() => setIsDragOver(true)}
         onMouseLeave={() => setIsDragOver(false)}
         onMouseUp={() => alert('drop')}
@@ -156,8 +156,16 @@ const DropArea = () => {
             : { boxShadow: 'none' }
         }
       >
-        <MainBlock h='100%' w='100%' type='gradient'>
-          {}
+        <MainBlock
+          h='100%'
+          w='100%'
+          type='gradient'
+          className={classes.dropArea}
+        >
+          <span className={classes.text}>{props.title}</span>
+          <span className={classes.text} style={{ fontSize: 10 }}>
+            {props.description}
+          </span>
         </MainBlock>
       </motion.div>
     </>
@@ -165,12 +173,30 @@ const DropArea = () => {
 };
 
 const TransferZone = () => {
+  const groups = [
+    {
+      id: 12,
+      title: 'В "Не изучаются"',
+    },
+    {
+      id: 2,
+      title: 'В "Основной словарь"',
+    },
+    {
+      id: 3,
+      title: 'В "Усиленный словарь"',
+    },
+    {
+      id: 4,
+      title: 'В "Фокус словарь"',
+    },
+  ];
   return (
     <div className={classes.transferZone}>
-      <DropArea />
-      <DropArea />
-      <DropArea />
-      <DropArea />
+      {groups.map((i) => (
+        <DropArea key={i.id} title={i.title} />
+      ))}{' '}
+      <DropArea title='Удалить' description='ужерживайте 3 сек.' />
     </div>
   );
 };

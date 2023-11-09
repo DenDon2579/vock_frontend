@@ -100,7 +100,7 @@ const WordItem = (props: Props) => {
             onPointerDown={startDrag}
             className={classes.drag}
             initial={{
-              background: 'none',
+              background: 'transparent',
               borderRightWidth: 1,
               pointerEvents: 'all',
             }}
