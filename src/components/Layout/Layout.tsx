@@ -6,9 +6,23 @@ import MiniProfile from '../miniProfile/MiniProfile';
 import Dictionary from 'components/dictionary/Dictionary';
 import { motion } from 'framer-motion';
 import MultiTaskArea from 'components/multiTaskArea/MultiTaskArea';
+import {
+  createBrowserRouter,
+  Route,
+  Router,
+  RouterProvider,
+  Routes,
+} from 'react-router-dom';
+import Learning from 'components/learning/Learning';
 
 type Props = {};
-
+// const router = createBrowserRouter([
+//   {
+//     path: '/',
+//     element: <Dictionary />,
+//   },
+//   { path: 'learning', element: <Learning /> },
+// ]);
 const Layout = (props: Props) => {
   return (
     <div className={classes.wrapper}>
@@ -36,7 +50,10 @@ const Layout = (props: Props) => {
           style={{ zIndex: 10 }}
           transition={{ delay: 0.2, type: 'spring' }}
         >
-          <Dictionary />
+          <Routes>
+            <Route path='/' element={<Dictionary />} />
+            <Route path='learning' element={<Learning />} />
+          </Routes>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: -50 }}

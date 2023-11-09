@@ -5,9 +5,14 @@ import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import { deactivateImportantModule } from 'store/slices/UiSlice';
 import MainButton from 'components/ui/blocks/mainButton/MainButton';
+import { Link } from 'react-router-dom';
 
 const StartLearningButton = () => {
-  return <MainButton type='gradient'>Начать изучение слов</MainButton>;
+  return (
+    <Link to='/learning' style={{ textDecoration: 'none' }}>
+      <MainButton type='gradient'>Начать изучение слов</MainButton>
+    </Link>
+  );
 };
 
 const AddNewWord = () => {
@@ -147,14 +152,23 @@ const DropArea = (props: any) => {
         onMouseEnter={() => setIsDragOver(true)}
         onMouseLeave={() => setIsDragOver(false)}
         onMouseUp={() => alert('drop')}
-        initial={{}}
+        initial={{
+          background: 'none',
+        }}
         animate={
-          isDragOver
-            ? {
-                boxShadow: '0 0 10px 1px rgba(255, 255 ,255 ,0.1) inset',
+          !props.isRemove
+            ? isDragOver
+              ? {
+                  boxShadow: '0 0 10px 1px rgba(255, 255 ,255 ,0.1) inset',
+                }
+              : { boxShadow: 'none' }
+            : {
+                background: isDragOver
+                  ? 'linear-gradient(to right, rgba(255, 0, 0, 0.3) 100%, rgba(255, 0, 0, 0.091) 100%)'
+                  : 'linear-gradient(to right, rgba(255, 0, 0, 0.3) 0%, rgba(255, 0, 0, 0.091) 0%)',
               }
-            : { boxShadow: 'none' }
         }
+        transition={{ duration: isDragOver ? 2 : 0.3, type: 'just' }}
       >
         <MainBlock
           h='100%'
@@ -173,6 +187,7 @@ const DropArea = (props: any) => {
 };
 
 const TransferZone = () => {
+  //linear-gradient(to right, ${progressBarColors[progressType]} ${progress}%, transparent ${progress}%)
   const groups = [
     {
       id: 12,
@@ -196,7 +211,11 @@ const TransferZone = () => {
       {groups.map((i) => (
         <DropArea key={i.id} title={i.title} />
       ))}{' '}
-      <DropArea title='Удалить' description='ужерживайте 3 сек.' />
+      <DropArea
+        title='Удалить'
+        description='ужерживайте 2 сек.'
+        isRemove={true}
+      />
     </div>
   );
 };

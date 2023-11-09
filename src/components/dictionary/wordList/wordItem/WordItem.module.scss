@@ -97,4 +97,9 @@
   align-items: center;
   padding: 0 $spacing;
   cursor: grab;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 0 50px 0 #ffffff16 inset;
+  }
 }

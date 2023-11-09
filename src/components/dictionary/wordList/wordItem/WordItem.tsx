@@ -104,7 +104,6 @@ const WordItem = (props: Props) => {
               borderRightWidth: 1,
               pointerEvents: 'all',
             }}
-            whileHover={{ background: '#d0c2ff14' }}
             whileTap={{
               borderRightWidth: 0,
               background: props.dndColor,
