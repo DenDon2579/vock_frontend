@@ -2,7 +2,7 @@ import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 import classes from './MultiTaskArea.module.scss';
 import MainBlock from 'components/ui/blocks/mainBlock/MainBlock';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, Reorder, motion } from 'framer-motion';
 import { deactivateImportantModule } from 'store/slices/UiSlice';
 import MainButton from 'components/ui/blocks/mainButton/MainButton';
 import { Link } from 'react-router-dom';
@@ -55,6 +55,8 @@ const AddNewWord = () => {
     }
   };
 
+  const [translations, setTranslations] = useState(['привет', 'хай', 'ку']);
+
   return (
     <form className={classes.form}>
       <span className={classes.label}>Слово на английском</span>
@@ -80,32 +82,26 @@ const AddNewWord = () => {
             w='100%'
             type='gradient'
           >
-            <ul className={classes.translationList}>
-              <li className={classes.translation}>
-                <span>привет</span>
-                <input
-                  className={classes.checkbox}
-                  type='checkbox'
-                  defaultChecked={true}
-                />
-              </li>
-              <li className={classes.translation}>
-                <span>хай</span>
-                <input
-                  className={classes.checkbox}
-                  type='checkbox'
-                  defaultChecked={true}
-                />
-              </li>
-              <li className={classes.translation}>
-                <span>ку</span>
-                <input
-                  className={classes.checkbox}
-                  type='checkbox'
-                  defaultChecked={true}
-                />
-              </li>
-            </ul>
+            <Reorder.Group
+              className={classes.translationList}
+              values={translations}
+              onReorder={setTranslations}
+            >
+              {translations.map((item) => (
+                <Reorder.Item
+                  className={classes.translation}
+                  key={item}
+                  value={item}
+                >
+                  <span>{item}</span>
+                  <input
+                    className={classes.checkbox}
+                    type='checkbox'
+                    defaultChecked={true}
+                  />
+                </Reorder.Item>
+              ))}
+            </Reorder.Group>
           </MainBlock>
           <span className={classes.label}>Как хорошо вы знаете это слово?</span>
           <MainBlock

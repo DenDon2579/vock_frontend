@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import UiSlice from './slices/UiSlice';
+import dictionarySlice from './slices/dictionarySlice';
 // ...
 const store = configureStore({
   reducer: {
     ui: UiSlice,
+    dictionary: dictionarySlice,
   },
 });
 

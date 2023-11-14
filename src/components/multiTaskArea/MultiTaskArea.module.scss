@@ -141,6 +141,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: box-shadow 0.5s;
+  &:first-child {
+    box-shadow: 0 0 100px 0 #ffffff08 inset;
+  }
 }
 
 .checkbox {

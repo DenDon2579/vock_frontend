@@ -10,15 +10,13 @@ import {
   activateImportantModule,
   deactivateImportantModule,
 } from 'store/slices/UiSlice';
+import { IWord } from 'types/dictionary';
 
-type Props = {
-  progress: number;
+interface Props extends IWord {
   progressBarColor: string;
   dndColor: string;
-  word: string;
-  translation: string;
   custom: number;
-};
+}
 
 const WordItem = (props: Props) => {
   const dispatch = useAppDispatch();
@@ -107,7 +105,7 @@ const WordItem = (props: Props) => {
             whileTap={{
               borderRightWidth: 0,
               background: props.dndColor,
-              width: props.word.length * 16,
+              width: props.englishWord.length * 16,
               cursor: 'grabbing',
             }}
             whileDrag={{ pointerEvents: 'none' }}
@@ -125,17 +123,19 @@ const WordItem = (props: Props) => {
             }}
           >
             <Icon icon={RiDraggable} />
-            {dragging && <span className={classes.text}>{props.word}</span>}
+            {dragging && (
+              <span className={classes.text}>{props.englishWord}</span>
+            )}
           </motion.div>
           {!dragging && (
             <>
               <div className={classes.left}>
-                <span className={classes.text}>hello</span>
+                <span className={classes.text}>{props.englishWord}</span>
               </div>
               <div className={classes.divider}>/</div>
               <div className={classes.right}>
                 <div className={classes.translation}>
-                  <span className={classes.text}>привет</span>
+                  <span className={classes.text}>{props.translation}</span>
                 </div>
                 <div className={classes.progressValue}>
                   <span className={classes.text}>{props.progress}</span>
