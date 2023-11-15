@@ -135,6 +135,7 @@
 .translation {
   padding: $smallSpacing $spacing;
   border-bottom: 1px solid $borderColor;
+
   &:last-child {
     border-bottom: none;
   }

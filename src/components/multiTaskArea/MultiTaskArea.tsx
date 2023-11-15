@@ -86,6 +86,9 @@ const AddNewWord = () => {
               className={classes.translationList}
               values={translations}
               onReorder={setTranslations}
+              as='ol'
+              axis='y'
+              transition={{ type: 'just' }}
             >
               {translations.map((item) => (
                 <Reorder.Item
@@ -164,7 +167,7 @@ const DropArea = (props: any) => {
                   : 'linear-gradient(to right, rgba(255, 0, 0, 0.3) 0%, rgba(255, 0, 0, 0.091) 0%)',
               }
         }
-        transition={{ duration: isDragOver ? 2 : 0.3, type: 'just' }}
+        // transition={{ duration: isDragOver ? 2 : 0.3, type: 'just' }}
       >
         <MainBlock
           h='100%'
@@ -234,7 +237,7 @@ const MultiTaskArea = (props: Props) => {
   return (
     <MainBlock className={classes.wrapper} w='100%' h='auto' type='glass'>
       <div className={classes.content}>
-        <AnimatePresence mode='popLayout'>
+        <AnimatePresence>
           {activeModules.map((module) => {
             return (
               <motion.div

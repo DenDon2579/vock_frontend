@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classes from './WordItem.module.scss';
-import { Variants, delay, motion, useDragControls } from 'framer-motion';
+import { Variants, motion, useDragControls } from 'framer-motion';
 import Icon from 'components/ui/other/icon/Icon';
 import { AiOutlineDown } from 'react-icons/ai';
 import { RiDraggable } from 'react-icons/ri';

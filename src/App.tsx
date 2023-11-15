@@ -13,11 +13,11 @@ function App() {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/dictionary/words')
-      .then((res) => dispatch(setWords(res.data)));
-  });
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:3001/dictionary/words')
+  //     .then((res) => dispatch(setWords(res.data)));
+  // });
   // const test = () => {
   //   axios
   //     .post('http://localhost:3001/dictionary/words', { text: state })
