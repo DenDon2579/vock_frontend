@@ -130,9 +130,36 @@
 .translationList {
   list-style: none;
   color: $mainTextColor;
+  width: 100%;
+}
+
+.translationsWrapper {
+  margin-bottom: $spacing;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.translationHeader {
+  padding: $smallSpacing $spacing;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $accentColor;
+  border-radius: $mainBorderRadius $mainBorderRadius 0 0;
+  width: 100%;
 }
 
 .translation {
+  width: 100%;
   padding: $smallSpacing $spacing;
   border-bottom: 1px solid $borderColor;
 
@@ -143,9 +170,6 @@
   justify-content: space-between;
   align-items: center;
   transition: box-shadow 0.5s;
-  &:first-child {
-    box-shadow: 0 0 100px 0 #ffffff08 inset;
-  }
 }
 
 .checkbox {

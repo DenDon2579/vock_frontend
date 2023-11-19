@@ -8,12 +8,16 @@ import { motion } from 'framer-motion';
 import MultiTaskArea from 'components/multiTaskArea/MultiTaskArea';
 import {
   createBrowserRouter,
+  Navigate,
   Route,
   Router,
   RouterProvider,
   Routes,
 } from 'react-router-dom';
 import Learning from 'components/learning/Learning';
+import Main from './main/Main';
+import { useAppSelector } from 'hooks/redux';
+import Auth from 'components/authentication/Auth';
 
 type Props = {};
 // const router = createBrowserRouter([
@@ -23,47 +27,19 @@ type Props = {};
 //   },
 //   { path: 'learning', element: <Learning /> },
 // ]);
+
 const Layout = (props: Props) => {
+  const isAuth = useAppSelector((state) => state.user.isAuth);
+  console.log(isAuth);
   return (
     <div className={classes.wrapper}>
-      <div className={classes.main}>
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={[classes.block, classes.titleWrapper].join(' ')}
-          transition={{ delay: 0.1, type: 'spring' }}
-        >
-          <h1 className={classes.title}>VOCK</h1>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={classes.block}
-          transition={{ delay: 0.1, type: 'spring' }}
-        >
-          <MiniProfile />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={classes.block}
-          style={{ zIndex: 10 }}
-          transition={{ delay: 0.2, type: 'spring' }}
-        >
-          <Routes>
-            <Route path='/' element={<Dictionary />} />
-            <Route path='learning' element={<Learning />} />
-          </Routes>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={classes.block}
-          transition={{ delay: 0.2, type: 'spring' }}
-        >
-          <MultiTaskArea />
-        </motion.div>
-      </div>
+      <Routes>
+        <Route
+          path='/*'
+          element={isAuth ? <Main /> : <Navigate to='/auth' />}
+        ></Route>
+        <Route path='/auth' element={<Auth />}></Route>
+      </Routes>
     </div>
   );
 };

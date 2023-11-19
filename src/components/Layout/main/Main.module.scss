@@ -1,0 +1,36 @@
+@import 'scss/variables.scss';
+
+.wrapper {
+  position: relative;
+  top: 50px;
+  margin: auto;
+  width: fit-content;
+  height: auto;
+  display: grid;
+  grid-template-columns: calc(609px + ($spacing * 2)) calc(
+      250px + ($spacing * 2)
+    );
+  column-gap: calc($gridSpacing * 4);
+  grid-template-rows: calc(35px + ($spacing * 2)) 60vh;
+  row-gap: calc($gridSpacing * 2);
+
+  // column-gap: 48px;
+  // row-gap: 24px;
+}
+
+.block {
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  font-size: 32px;
+  color: $mainTextColor;
+  letter-spacing: 20px;
+  font-weight: 500;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+}

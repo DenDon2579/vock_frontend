@@ -9,7 +9,7 @@ import { useAppDispatch } from 'hooks/redux';
 import {
   activateImportantModule,
   deactivateImportantModule,
-} from 'store/slices/UiSlice';
+} from 'store/slices/uiSlice';
 import { IWord } from 'types/dictionary';
 
 interface Props extends IWord {

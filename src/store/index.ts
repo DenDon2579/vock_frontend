@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import UiSlice from './slices/UiSlice';
+import uiSlice from './slices/uiSlice';
 import dictionarySlice from './slices/dictionarySlice';
+import userSlice from './slices/userSlice';
 // ...
 const store = configureStore({
   reducer: {
-    ui: UiSlice,
+    ui: uiSlice,
     dictionary: dictionarySlice,
+    user: userSlice,
   },
 });
 

@@ -3,7 +3,7 @@ import classes from './MultiTaskArea.module.scss';
 import MainBlock from 'components/ui/blocks/mainBlock/MainBlock';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { AnimatePresence, Reorder, motion } from 'framer-motion';
-import { deactivateImportantModule } from 'store/slices/UiSlice';
+import { deactivateImportantModule } from 'store/slices/uiSlice';
 import MainButton from 'components/ui/blocks/mainButton/MainButton';
 import { Link } from 'react-router-dom';
 
@@ -57,6 +57,8 @@ const AddNewWord = () => {
 
   const [translations, setTranslations] = useState(['привет', 'хай', 'ку']);
 
+  const translationChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {};
+
   return (
     <form className={classes.form}>
       <span className={classes.label}>Слово на английском</span>
@@ -74,38 +76,52 @@ const AddNewWord = () => {
       </MainBlock>
 
       {isWordEntered && (
-        <>
+        <div className={classes.stage}>
           <span className={classes.label}>Переводы</span>
           <MainBlock
-            className={`${classes.translationsWrapper} ${classes.stage}`}
+            className={`${classes.translationsWrapper} `}
             h='auto'
             w='100%'
             type='gradient'
           >
-            <Reorder.Group
-              className={classes.translationList}
-              values={translations}
-              onReorder={setTranslations}
-              as='ol'
-              axis='y'
-              transition={{ type: 'just' }}
-            >
+            <div className={classes.translationHeader}>
+              <span className={classes.text}>Основной перевод</span>
+            </div>
+
+            <div className={classes.translation}>
+              <span className={classes.text}>qweqwe</span>
+              <input
+                className={classes.checkbox}
+                type='checkbox'
+                defaultChecked={true}
+              />
+            </div>
+          </MainBlock>
+
+          <MainBlock
+            className={`${classes.translationsWrapper} `}
+            h='auto'
+            w='100%'
+            type='gradient'
+          >
+            <ul className={classes.translationList}>
+              <div className={classes.translationHeader}>
+                <span className={classes.text}>Другие переводы</span>
+              </div>
               {translations.map((item) => (
-                <Reorder.Item
-                  className={classes.translation}
-                  key={item}
-                  value={item}
-                >
+                <li className={classes.translation} key={item}>
                   <span>{item}</span>
                   <input
+                    onChange={translationChangeHandler}
                     className={classes.checkbox}
                     type='checkbox'
                     defaultChecked={true}
                   />
-                </Reorder.Item>
+                </li>
               ))}
-            </Reorder.Group>
+            </ul>
           </MainBlock>
+
           <span className={classes.label}>Как хорошо вы знаете это слово?</span>
           <MainBlock
             className={`${classes.inputWrapper} ${classes.stage}`}
@@ -124,7 +140,7 @@ const AddNewWord = () => {
             />
             <span className={classes.progress}>{`${progress}%`}</span>
           </MainBlock>
-        </>
+        </div>
       )}
 
       <div className={classes.buttons}>
@@ -167,7 +183,7 @@ const DropArea = (props: any) => {
                   : 'linear-gradient(to right, rgba(255, 0, 0, 0.3) 0%, rgba(255, 0, 0, 0.091) 0%)',
               }
         }
-        // transition={{ duration: isDragOver ? 2 : 0.3, type: 'just' }}
+        transition={{ duration: isDragOver ? 2 : 0.3, type: 'just' }}
       >
         <MainBlock
           h='100%'
@@ -237,7 +253,7 @@ const MultiTaskArea = (props: Props) => {
   return (
     <MainBlock className={classes.wrapper} w='100%' h='auto' type='glass'>
       <div className={classes.content}>
-        <AnimatePresence>
+        <AnimatePresence mode='popLayout'>
           {activeModules.map((module) => {
             return (
               <motion.div

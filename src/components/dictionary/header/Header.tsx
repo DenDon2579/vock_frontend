@@ -10,7 +10,7 @@ import { useAppDispatch } from 'hooks/redux';
 import {
   activateImportantModule,
   setActiveModules,
-} from 'store/slices/UiSlice';
+} from 'store/slices/uiSlice';
 import MainButton from 'components/ui/blocks/mainButton/MainButton';
 
 type Props = {};

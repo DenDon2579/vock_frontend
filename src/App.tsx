@@ -6,7 +6,7 @@ import Video from './static/media/qwe.mp4';
 import { Reorder, motion } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { setWords } from 'store/slices/dictionarySlice';
-
+import classes from './App.module.scss';
 function App() {
   const KEY =
     'dict.1.1.20231009T003419Z.59da905cfe137314.c40bb755827b88b24becea0d95068658e9dc2c76';
@@ -31,7 +31,10 @@ function App() {
   );
 
   return (
-    <div style={isDragging ? { cursor: 'grabbing' } : {}}>
+    <div
+      className={classes.wrapper}
+      style={isDragging ? { cursor: 'grabbing' } : {}}
+    >
       <Layout />
       <video
         id='video'
@@ -46,7 +49,7 @@ function App() {
           top: 0,
           zIndex: -1,
           opacity: 0.5,
-          filter: 'brightness(0.08) blur(25px)',
+          filter: 'brightness(0.16) blur(30px)',
           objectFit: 'fill',
         }}
         src={Video}
