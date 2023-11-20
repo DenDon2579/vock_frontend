@@ -3,6 +3,10 @@ import classes from './Auth.module.scss';
 import MainBlock from 'components/ui/blocks/mainBlock/MainBlock';
 import { Variants, motion } from 'framer-motion';
 import MainButton from 'components/ui/blocks/mainButton/MainButton';
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+import { useAppDispatch } from 'hooks/redux';
+import { setAuth } from 'store/slices/userSlice';
 
 type Props = {};
 
@@ -34,6 +38,20 @@ const Auth = (props: Props) => {
       },
     }),
   };
+  const dispatch = useAppDispatch();
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      const { data: userInfo } = await axios.post(
+        'http://localhost:3001/auth',
+        tokenResponse.access_token
+      );
+      localStorage.setItem('token', tokenResponse.access_token);
+      dispatch(setAuth(true));
+      console.log(userInfo);
+    },
+    onError: (errorResponse) => console.log(errorResponse),
+  });
+
   return (
     <div className={classes.wrapper}>
       <motion.h1
@@ -106,6 +124,9 @@ const Auth = (props: Props) => {
             </MainBlock>
           </div>
           <MainButton type='gradient'>Отправить</MainButton>
+          <MainButton onClick={googleLogin} type='gradient'>
+            Google
+          </MainButton>
         </div>
       </MainBlock>
     </div>
