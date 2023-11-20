@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import MiniProfile from 'components/miniProfile/MiniProfile';
 import Dictionary from 'components/dictionary/Dictionary';
 import Learning from 'components/learning/Learning';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import MultiTaskArea from 'components/multiTaskArea/MultiTaskArea';
 
 type Props = {};
@@ -38,6 +38,7 @@ const Main = (props: Props) => {
         <Routes>
           <Route path='dictionary' element={<Dictionary />} />
           <Route path='learning' element={<Learning />} />
+          <Route path='/' element={<Navigate to='dictionary' />} />
         </Routes>
       </motion.div>
       <motion.div

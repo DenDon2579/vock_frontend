@@ -1,11 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import MainBlock from './components/ui/blocks/mainBlock/MainBlock';
-import axios from 'axios';
+import { useEffect } from 'react';
 import Layout from './components/Layout/Layout';
 import Video from './static/media/qwe.mp4';
-import { Reorder, motion } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { setWords } from 'store/slices/dictionarySlice';
 import classes from './App.module.scss';
 function App() {
   const KEY =
@@ -25,6 +21,9 @@ function App() {
   //     .catch((err) => err);
   // };
   // const [state, setState] = useState('');
+
+  // useEffect(() => {}, []);
+
   const isDragging = useAppSelector(
     (state) =>
       state.ui.multiTaskArea.modules.importantModule?.type === 'dropArea'

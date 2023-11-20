@@ -41,9 +41,13 @@ const Auth = (props: Props) => {
   const dispatch = useAppDispatch();
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      const { data: userInfo } = await axios.post(
-        'http://localhost:3001/auth',
-        tokenResponse.access_token
+      const { data: userInfo } = await axios.get(
+        `http://localhost:3001/auth?token=${tokenResponse.access_token}`,
+        {
+          headers: {
+            Authorization: tokenResponse.access_token,
+          },
+        }
       );
       localStorage.setItem('token', tokenResponse.access_token);
       dispatch(setAuth(true));

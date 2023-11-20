@@ -38,7 +38,10 @@ const Layout = (props: Props) => {
           path='/*'
           element={isAuth ? <Main /> : <Navigate to='/auth' />}
         ></Route>
-        <Route path='/auth' element={<Auth />}></Route>
+        <Route
+          path='/auth'
+          element={!isAuth ? <Auth /> : <Navigate to='/' />}
+        ></Route>
       </Routes>
     </div>
   );
