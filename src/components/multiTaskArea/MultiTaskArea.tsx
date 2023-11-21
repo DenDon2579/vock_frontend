@@ -8,6 +8,8 @@ import MainButton from 'components/ui/blocks/mainButton/MainButton';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslateWordQuery } from 'services/DictionaryService';
+import { AiOutlineToTop } from 'react-icons/ai';
+import Icon from 'components/ui/other/icon/Icon';
 
 const StartLearningButton = () => {
   return (
@@ -57,7 +59,7 @@ const AddNewWord = () => {
     }
   };
 
-  const { data: translations } = useTranslateWordQuery(englishWord);
+  const { data: translations = [] } = useTranslateWordQuery(englishWord);
   console.log(translations);
   const translationChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {};
 
@@ -79,53 +81,65 @@ const AddNewWord = () => {
 
       {isWordEntered && (
         <div className={classes.stage}>
-          <span className={classes.label}>Переводы</span>
-          <MainBlock
-            className={`${classes.translationsWrapper} `}
-            h='auto'
-            w='100%'
-            type='gradient'
-          >
-            <div className={classes.translationHeader}>
-              <span className={classes.text}>Основной перевод</span>
-            </div>
-
-            <div className={classes.translation}>
-              <span className={classes.text}>{translations?.[0]?.text}</span>
-              <input
-                className={classes.checkbox}
-                type='checkbox'
-                defaultChecked={true}
-              />
-            </div>
-          </MainBlock>
-
-          <MainBlock
-            className={`${classes.translationsWrapper} `}
-            h='auto'
-            w='100%'
-            type='gradient'
-          >
-            <ul className={classes.translationList}>
+          <span className={classes.label}>
+            {!!translations.length ? 'Переводы' : 'Нет переводов'}
+          </span>
+          {!!translations.length && (
+            <MainBlock
+              className={`${classes.translationsWrapper} `}
+              h='auto'
+              w='100%'
+              type='gradient'
+            >
               <div className={classes.translationHeader}>
-                <span className={classes.text}>Другие переводы</span>
+                <span className={classes.text}>Основной перевод</span>
               </div>
-              {translations?.slice(1).map((item) => (
-                <li
-                  className={classes.translation}
-                  key={item.text + item.popularity}
-                >
-                  <span>{item.text}</span>
-                  <input
-                    onChange={translationChangeHandler}
-                    className={classes.checkbox}
-                    type='checkbox'
-                    defaultChecked={true}
-                  />
-                </li>
-              ))}
-            </ul>
-          </MainBlock>
+
+              <div className={classes.translation}>
+                <span className={classes.text}>{translations?.[0]?.text}</span>
+                <input
+                  className={classes.checkbox}
+                  type='checkbox'
+                  defaultChecked={true}
+                />
+              </div>
+            </MainBlock>
+          )}
+
+          {translations?.length > 1 && (
+            <MainBlock
+              className={`${classes.translationsWrapper} `}
+              h='auto'
+              w='100%'
+              type='gradient'
+            >
+              <ul className={classes.translationList}>
+                <div className={classes.translationHeader}>
+                  <span className={classes.text}>Другие переводы</span>
+                </div>
+                {translations?.slice(1).map((item) => (
+                  <li
+                    className={classes.translation}
+                    key={item.text + item.popularity}
+                  >
+                    <span>{item.text}</span>
+                    <div>
+                      <input
+                        onChange={translationChangeHandler}
+                        className={classes.checkbox}
+                        type='checkbox'
+                        defaultChecked={true}
+                      />
+                      {/* <Icon
+                      icon={AiOutlineToTop}
+                      className={classes.makePrimary}
+                    /> */}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </MainBlock>
+          )}
 
           <span className={classes.label}>Как хорошо вы знаете это слово?</span>
           <MainBlock
