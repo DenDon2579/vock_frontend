@@ -135,7 +135,9 @@ const WordItem = (props: Props) => {
               <div className={classes.divider}>/</div>
               <div className={classes.right}>
                 <div className={classes.translation}>
-                  <span className={classes.text}>{props.translation}</span>
+                  <span className={classes.text}>
+                    {props.translations[0].text}
+                  </span>
                 </div>
                 <div className={classes.progressValue}>
                   <span className={classes.text}>{props.progress}</span>

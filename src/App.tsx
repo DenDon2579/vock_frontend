@@ -3,11 +3,27 @@ import Layout from './components/Layout/Layout';
 import Video from './static/media/qwe.mp4';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import classes from './App.module.scss';
+import axios from 'axios';
+import { setAuth } from 'store/slices/userSlice';
 function App() {
   const KEY =
     'dict.1.1.20231009T003419Z.59da905cfe137314.c40bb755827b88b24becea0d95068658e9dc2c76';
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      axios
+        .get(`http://localhost:3001/auth?token=${token}`, {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((res) => dispatch(setAuth(true)))
+        .catch(() => localStorage.removeItem('token'));
+    }
+  }, []);
 
   // useEffect(() => {
   //   axios

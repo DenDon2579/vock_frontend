@@ -1,6 +1,12 @@
 export interface IWord {
-  _id: string;
   englishWord: string;
-  translation: string;
+  type: string;
+  translations: ITranslation[];
   progress: number;
+}
+
+export interface ITranslation {
+  pos: string;
+  text: string;
+  popularity: number;
 }

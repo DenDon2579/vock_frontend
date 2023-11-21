@@ -6,6 +6,8 @@ import { AnimatePresence, Reorder, motion } from 'framer-motion';
 import { deactivateImportantModule } from 'store/slices/uiSlice';
 import MainButton from 'components/ui/blocks/mainButton/MainButton';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useTranslateWordQuery } from 'services/DictionaryService';
 
 const StartLearningButton = () => {
   return (
@@ -47,16 +49,16 @@ const AddNewWord = () => {
   const wordInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
+    setEndlishWord(value);
     if (value) {
-      setEndlishWord(value);
       setIsWordEntered(true);
     } else {
       setIsWordEntered(false);
     }
   };
 
-  const [translations, setTranslations] = useState(['привет', 'хай', 'ку']);
-
+  const { data: translations } = useTranslateWordQuery(englishWord);
+  console.log(translations);
   const translationChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {};
 
   return (
@@ -89,7 +91,7 @@ const AddNewWord = () => {
             </div>
 
             <div className={classes.translation}>
-              <span className={classes.text}>qweqwe</span>
+              <span className={classes.text}>{translations?.[0]?.text}</span>
               <input
                 className={classes.checkbox}
                 type='checkbox'
@@ -108,9 +110,12 @@ const AddNewWord = () => {
               <div className={classes.translationHeader}>
                 <span className={classes.text}>Другие переводы</span>
               </div>
-              {translations.map((item) => (
-                <li className={classes.translation} key={item}>
-                  <span>{item}</span>
+              {translations?.slice(1).map((item) => (
+                <li
+                  className={classes.translation}
+                  key={item.text + item.popularity}
+                >
+                  <span>{item.text}</span>
                   <input
                     onChange={translationChangeHandler}
                     className={classes.checkbox}
