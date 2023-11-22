@@ -4,22 +4,20 @@ import MainBlock from '../ui/blocks/mainBlock/MainBlock';
 import { AiOutlineLogout, AiOutlineSetting } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
 import DropDown from 'components/ui/modules/dropDown/DropDownSelect';
+import { useGetUserDataQuery } from 'services/UserService';
 type Props = {};
 
 const MiniProfile = (props: Props) => {
+  const { data: userData } = useGetUserDataQuery(null);
   return (
     <MainBlock w='auto' h='auto' type='glass'>
       <div className={classes.wrapper}>
         <div className={classes.content}>
           <div className={classes.avatarWrapper}>
-            <img
-              src='https://i1.sndcdn.com/artworks-BXugSxIERNzWqoyd-ZCnyCA-t500x500.jpg'
-              className={classes.avatar}
-              alt=''
-            />
+            <img src={userData?.avatar} className={classes.avatar} alt='' />
           </div>
           <div className={classes.text}>
-            <span>Профиль</span>
+            <span>{userData?.name}</span>
           </div>
           <div className={classes.optionsWrapper}>
             <div className={classes.options}>

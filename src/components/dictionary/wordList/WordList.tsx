@@ -19,31 +19,29 @@ const WordList = (props: Props) => {
     high: 'rgba(139, 255, 85, 0.25)',
     mid: 'rgba(255, 211, 56, 0.25)',
   };
-  const { data: words = [] } = useGetWordsQuery(0);
-  console.log(words);
-  // .map((word) => {
-  //   let progressType: 'low' | 'mid' | 'high' = 'low';
-  //   if (word.progress > 34 && word.progress <= 66) {
-  //     progressType = 'mid';
-  //   } else if (word.progress > 66) {
-  //     progressType = 'high';
-  //   }
-  //   return {
-  //     ...word,
-  //     progressBarColor: progressBarColors[progressType],
-  //     dndColor: dndColors[progressType],
-  //   };
-  // });
+  const { data: wordsResponce } = useGetWordsQuery(0);
+  const words = wordsResponce?.map((word) => {
+    let progressType: 'low' | 'mid' | 'high' = 'low';
+    if (word.progress > 34 && word.progress <= 66) {
+      progressType = 'mid';
+    } else if (word.progress > 66) {
+      progressType = 'high';
+    }
+    return {
+      ...word,
+      progressBarColor: progressBarColors[progressType],
+      dndColor: dndColors[progressType],
+    };
+  });
 
   return (
-    // <div className={classes.wrapper}>
-    //   <div className={classes.content}>
-    //     {words.map((word, i) => (
-    //       <WordItem custom={i} key={word._id} {...word} />
-    //     ))}
-    //   </div>
-    // </div>
-    <></>
+    <div className={classes.wrapper}>
+      <div className={classes.content}>
+        {words?.map((word, i) => (
+          <WordItem custom={i} key={word.dndColor} {...word} />
+        ))}
+      </div>
+    </div>
   );
 };
 

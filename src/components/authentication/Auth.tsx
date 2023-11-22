@@ -42,7 +42,7 @@ const Auth = (props: Props) => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       const { data: userInfo } = await axios.get(
-        `http://localhost:3001/auth?token=${tokenResponse.access_token}`,
+        `http://localhost:3001/user/auth?token=${tokenResponse.access_token}`,
         {
           headers: {
             Authorization: tokenResponse.access_token,
