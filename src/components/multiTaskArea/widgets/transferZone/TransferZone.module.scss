@@ -1,0 +1,34 @@
+@import 'scss/variables.scss';
+
+.text {
+  color: $mainTextColor;
+}
+
+.transferZone {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropAreaWrapper {
+  width: 100%;
+  height: 30px + $spacing;
+  margin-top: $spacing;
+  border-radius: $mainBorderRadius;
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    background: rgba(255, 0, 0, 0.091);
+  }
+}
+
+.dropArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

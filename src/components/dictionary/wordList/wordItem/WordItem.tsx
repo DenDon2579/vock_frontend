@@ -7,8 +7,8 @@ import { RiDraggable } from 'react-icons/ri';
 import MainBlock from 'components/ui/blocks/mainBlock/MainBlock';
 import { useAppDispatch } from 'hooks/redux';
 import {
-  activateImportantModule,
-  deactivateImportantModule,
+  activateImportantWidget,
+  deactivateImportantWidget,
 } from 'store/slices/uiSlice';
 import { IWord } from 'types/dictionary';
 
@@ -110,15 +110,15 @@ const WordItem = (props: Props) => {
             }}
             whileDrag={{ pointerEvents: 'none' }}
             onMouseDown={() => {
-              dispatch(activateImportantModule(['dropArea', false]));
+              dispatch(activateImportantWidget(['dropArea', false]));
               setDragging(true);
             }}
             onMouseUp={() => {
-              dispatch(deactivateImportantModule());
+              dispatch(deactivateImportantWidget());
               setDragging(false);
             }}
             onDragEnd={() => {
-              dispatch(deactivateImportantModule());
+              dispatch(deactivateImportantWidget());
               setDragging(false);
             }}
           >

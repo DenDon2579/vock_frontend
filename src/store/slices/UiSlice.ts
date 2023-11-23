@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-const moduleTitles = {
+const widgetsTitles = {
   learnButton: 'Обучение',
   addNewWord: 'Добавление слова',
   dropArea: 'Перенос',
   notifications: 'Уведомления',
 };
-type ModulesTypes = 'learnButton' | 'addNewWord' | 'dropArea' | 'notifications';
-interface IModule {
-  type: ModulesTypes;
+type WidgetsTypes = 'learnButton' | 'addNewWord' | 'dropArea' | 'notifications';
+interface IWidget {
+  type: WidgetsTypes;
   title: string;
 }
 interface IState {
   multiTaskArea: {
-    modules: {
-      activeModules: IModule[];
-      importantModule: IModule | null;
+    widgets: {
+      activeWidgets: IWidget[];
+      importantWidget: IWidget | null;
       focusOnImportant: boolean;
     };
   };
@@ -22,9 +22,11 @@ interface IState {
 
 const initialState: IState = {
   multiTaskArea: {
-    modules: {
-      activeModules: [{ type: 'learnButton', title: moduleTitles.learnButton }],
-      importantModule: null,
+    widgets: {
+      activeWidgets: [
+        { type: 'learnButton', title: widgetsTitles.learnButton },
+      ],
+      importantWidget: null,
       focusOnImportant: false,
     },
   },
@@ -34,49 +36,49 @@ const UiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    setActiveModules(state, action: PayloadAction<IModule[]>) {
-      state.multiTaskArea.modules.activeModules = action.payload;
+    setActiveWidgets(state, action: PayloadAction<IWidget[]>) {
+      state.multiTaskArea.widgets.activeWidgets = action.payload;
     },
-    activateModule(state, action: PayloadAction<ModulesTypes>) {
+    activateWidget(state, action: PayloadAction<WidgetsTypes>) {
       if (
-        !state.multiTaskArea.modules.activeModules.includes({
+        !state.multiTaskArea.widgets.activeWidgets.includes({
           type: action.payload,
-          title: moduleTitles[action.payload],
+          title: widgetsTitles[action.payload],
         })
       ) {
-        state.multiTaskArea.modules.activeModules.push({
+        state.multiTaskArea.widgets.activeWidgets.push({
           type: action.payload,
-          title: moduleTitles[action.payload],
+          title: widgetsTitles[action.payload],
         });
       }
     },
-    deactivateModule(state, action: PayloadAction<ModulesTypes>) {
-      state.multiTaskArea.modules.activeModules.filter(
+    deactivateWidget(state, action: PayloadAction<WidgetsTypes>) {
+      state.multiTaskArea.widgets.activeWidgets.filter(
         (i) => i.type !== action.payload
       );
     },
-    activateImportantModule(
+    activateImportantWidget(
       state,
-      action: PayloadAction<[ModulesTypes, boolean]>
+      action: PayloadAction<[WidgetsTypes, boolean]>
     ) {
-      state.multiTaskArea.modules.importantModule = {
+      state.multiTaskArea.widgets.importantWidget = {
         type: action.payload[0],
-        title: moduleTitles[action.payload[0]],
+        title: widgetsTitles[action.payload[0]],
       };
-      state.multiTaskArea.modules.focusOnImportant = action.payload[1];
+      state.multiTaskArea.widgets.focusOnImportant = action.payload[1];
     },
-    deactivateImportantModule(state) {
-      state.multiTaskArea.modules.importantModule = null;
-      state.multiTaskArea.modules.focusOnImportant = false;
+    deactivateImportantWidget(state) {
+      state.multiTaskArea.widgets.importantWidget = null;
+      state.multiTaskArea.widgets.focusOnImportant = false;
     },
   },
 });
 
 export default UiSlice.reducer;
 export const {
-  setActiveModules,
-  activateModule,
-  deactivateModule,
-  activateImportantModule,
-  deactivateImportantModule,
+  setActiveWidgets,
+  activateWidget,
+  deactivateWidget,
+  activateImportantWidget,
+  deactivateImportantWidget,
 } = UiSlice.actions;

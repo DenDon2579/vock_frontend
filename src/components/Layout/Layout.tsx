@@ -5,7 +5,7 @@ import { AiOutlineSetting } from 'react-icons/ai';
 import MiniProfile from '../miniProfile/MiniProfile';
 import Dictionary from 'components/dictionary/Dictionary';
 import { motion } from 'framer-motion';
-import MultiTaskArea from 'components/multiTaskArea/MultiTaskArea';
+import MultiTaskArea from 'components/multiTaskArea/Sidebar';
 import {
   createBrowserRouter,
   Navigate,

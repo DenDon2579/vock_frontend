@@ -42,7 +42,7 @@ function App() {
 
   const isDragging = useAppSelector(
     (state) =>
-      state.ui.multiTaskArea.modules.importantModule?.type === 'dropArea'
+      state.ui.multiTaskArea.widgets.importantWidget?.type === 'dropArea'
   );
 
   return (

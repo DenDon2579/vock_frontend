@@ -54,15 +54,15 @@ const Dictionary = (props: Props) => {
   const createDictionary = () => {
     console.log('NEW');
   };
-  const isImportantModuleFocused = useAppSelector(
-    (state) => state.ui.multiTaskArea.modules.focusOnImportant
+  const isImportantWidgetFocused = useAppSelector(
+    (state) => state.ui.multiTaskArea.widgets.focusOnImportant
   );
   return (
     <motion.div
       initial={{ opacity: 1 }}
       className={classes.wrapper}
       animate={
-        isImportantModuleFocused
+        isImportantWidgetFocused
           ? { opacity: 0.5, pointerEvents: 'none', filter: 'blur(1px)' }
           : { opacity: 1, pointerEvents: 'all' }
       }

@@ -8,8 +8,8 @@ import DropDown from 'components/ui/modules/dropDown/DropDownSelect';
 import { motion } from 'framer-motion';
 import { useAppDispatch } from 'hooks/redux';
 import {
-  activateImportantModule,
-  setActiveModules,
+  activateImportantWidget,
+  setActiveWidgets,
 } from 'store/slices/uiSlice';
 import MainButton from 'components/ui/blocks/mainButton/MainButton';
 
@@ -25,7 +25,7 @@ const Header = (props: Props) => {
     { id: 5, title: 'По прогрессу' },
   ];
   const addNewWord = () => {
-    dispatch(activateImportantModule(['addNewWord', true]));
+    dispatch(activateImportantWidget(['addNewWord', true]));
   };
   const [isSortUpstream, setSortDirection] = useState(false);
   return (

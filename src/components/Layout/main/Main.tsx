@@ -5,7 +5,7 @@ import MiniProfile from 'components/miniProfile/MiniProfile';
 import Dictionary from 'components/dictionary/Dictionary';
 import Learning from 'components/learning/Learning';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import MultiTaskArea from 'components/multiTaskArea/MultiTaskArea';
+import MultiTaskArea from 'components/multiTaskArea/Sidebar';
 
 type Props = {};
 
