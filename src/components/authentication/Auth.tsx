@@ -40,18 +40,17 @@ const Auth = (props: Props) => {
   };
   const dispatch = useAppDispatch();
   const googleLogin = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      const { data: userInfo } = await axios.get(
-        `http://localhost:3001/user/auth?token=${tokenResponse.access_token}`,
-        {
+    onSuccess: (tokenResponse) => {
+      axios
+        .head(`http://localhost:3001/user/auth`, {
           headers: {
             Authorization: tokenResponse.access_token,
           },
-        }
-      );
-      localStorage.setItem('token', tokenResponse.access_token);
-      dispatch(setAuth(true));
-      console.log(userInfo);
+        })
+        .then(() => {
+          localStorage.setItem('token', tokenResponse.access_token);
+          dispatch(setAuth(true));
+        });
     },
     onError: (errorResponse) => console.log(errorResponse),
   });

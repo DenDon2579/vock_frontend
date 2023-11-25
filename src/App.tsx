@@ -15,7 +15,7 @@ function App() {
     const token = localStorage.getItem('token');
     if (token) {
       axios
-        .get(`http://localhost:3001/user/auth?token=${token}`, {
+        .head(`http://localhost:3001/user/auth`, {
           headers: {
             Authorization: token,
           },
@@ -24,21 +24,6 @@ function App() {
         .catch(() => localStorage.removeItem('token'));
     }
   }, []);
-
-  // useEffect(() => {
-  //   axios
-  //     .get('http://localhost:3001/dictionary/words')
-  //     .then((res) => dispatch(setWords(res.data)));
-  // });
-  // const test = () => {
-  //   axios
-  //     .post('http://localhost:3001/dictionary/words', { text: state })
-  //     .then((res) => console.log(res.data))
-  //     .catch((err) => err);
-  // };
-  // const [state, setState] = useState('');
-
-  // useEffect(() => {}, []);
 
   const isDragging = useAppSelector(
     (state) =>

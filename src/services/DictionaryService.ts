@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { HttpStatusCode } from 'axios';
 import { ITranslation, IWord } from 'types/dictionary';
 
 export const dictionaryApi = createApi({
@@ -17,7 +18,6 @@ export const dictionaryApi = createApi({
     }),
     translateWord: build.query<ITranslation[], string>({
       query: (word) => {
-        console.log(word);
         return {
           url: '/translate',
           params: { word },
@@ -27,7 +27,20 @@ export const dictionaryApi = createApi({
         };
       },
     }),
+    addWord: build.mutation<null, IWord>({
+      query: (word) => {
+        return {
+          url: '/words',
+          method: 'POST',
+          body: word,
+          headers: {
+            Authorization: localStorage.getItem('token')?.toString(),
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetWordsQuery, useTranslateWordQuery } = dictionaryApi;
+export const { useGetWordsQuery, useTranslateWordQuery, useAddWordMutation } =
+  dictionaryApi;

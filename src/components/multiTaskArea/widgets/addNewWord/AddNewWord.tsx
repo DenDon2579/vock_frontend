@@ -1,11 +1,15 @@
 import React, { ChangeEvent, useState } from 'react';
 import classes from './AddNewWord.module.scss';
 import { useAppDispatch } from 'hooks/redux';
-import { useTranslateWordQuery } from 'services/DictionaryService';
+import {
+  useAddWordMutation,
+  useTranslateWordQuery,
+} from 'services/DictionaryService';
 import MainBlock from 'components/ui/blocks/mainBlock/MainBlock';
 import MainButton from 'components/ui/blocks/mainButton/MainButton';
 import { deactivateImportantWidget } from 'store/slices/uiSlice';
 import { motion } from 'framer-motion';
+import { RiNumbersFill } from 'react-icons/ri';
 
 type Props = {};
 
@@ -14,7 +18,7 @@ const AddNewWord = (props: Props) => {
   const [rangeInputColor, setRangeInputColor] = useState(
     'linear-gradient(to right,rgba(255, 211, 56, 0.1) 50%, transparent 50%)'
   );
-  const [englishWord, setEndlishWord] = useState('');
+  const [englishWord, setEnglishWord] = useState('');
   const [isWordEntered, setIsWordEntered] = useState(false);
   const [progress, setProgress] = useState(50);
 
@@ -41,7 +45,7 @@ const AddNewWord = (props: Props) => {
   const wordInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    setEndlishWord(value);
+    setEnglishWord(value);
     if (value) {
       setIsWordEntered(true);
     } else {
@@ -49,9 +53,26 @@ const AddNewWord = (props: Props) => {
     }
   };
 
-  const { data: translations = [] } = useTranslateWordQuery(englishWord);
-  console.log(translations);
+  const { data: translations = [], error: err } =
+    useTranslateWordQuery(englishWord);
+
   const translationChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {};
+
+  const [pushNewWord, result] = useAddWordMutation();
+
+  const createNewWord = () => {
+    pushNewWord({
+      englishWord: englishWord,
+      type: 'nogLearning',
+      translations: translations,
+      progress: progress,
+    }).then(() => {
+      if (result.status === 'fulfilled') {
+        setIsWordEntered(false);
+        setEnglishWord('');
+      }
+    });
+  };
 
   return (
     <form className={classes.form}>
@@ -161,7 +182,11 @@ const AddNewWord = (props: Props) => {
         >
           Назад
         </MainButton>
-        <MainButton isHidden={!isWordEntered} type='gradientContrast'>
+        <MainButton
+          onClick={createNewWord}
+          isHidden={!isWordEntered}
+          type='gradientContrast'
+        >
           Добавить
         </MainButton>
       </div>

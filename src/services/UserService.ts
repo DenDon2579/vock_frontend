@@ -15,7 +15,15 @@ export const userApi = createApi({
         },
       }),
     }),
+    auth: build.query({
+      query: () => ({
+        url: '/auth',
+        headers: {
+          Authorization: localStorage.getItem('token')?.toString(),
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetUserDataQuery } = userApi;
+export const { useGetUserDataQuery, useAuthQuery } = userApi;
