@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import classes from './WordItem.module.scss';
 import { Variants, motion, useDragControls } from 'framer-motion';
 import Icon from 'components/ui/other/icon/Icon';
@@ -11,6 +11,7 @@ import {
   deactivateImportantWidget,
 } from 'store/slices/uiSlice';
 import { IWord } from 'types/dictionary';
+import MoreInfoDropDown from './moreInfoDropDown/MoreInfoDropDown';
 
 interface Props extends IWord {
   progressBarColor: string;
@@ -19,6 +20,7 @@ interface Props extends IWord {
 }
 
 const WordItem = (props: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const wordWrapperWariants: Variants = {
     hide: {
@@ -58,7 +60,7 @@ const WordItem = (props: Props) => {
   function startDrag(event: any) {
     dragControls.start(event, { snapToCursor: true });
   }
-
+  const [isMoreInfo, setMoreInfo] = useState(false);
   return (
     <>
       <motion.div
@@ -148,6 +150,10 @@ const WordItem = (props: Props) => {
         </MainBlock>
         {!dragging && (
           <MainBlock
+            onClick={() => {
+              setMoreInfo((prev) => !prev);
+              ref.current?.scrollTo();
+            }}
             w='auto'
             h='auto'
             type='gradient'
@@ -158,6 +164,7 @@ const WordItem = (props: Props) => {
         )}
       </motion.div>
       <div style={{ height: dragging ? 40 : 0 }}></div>
+      {isMoreInfo && <MoreInfoDropDown ref={ref} />}
     </>
   );
 };
